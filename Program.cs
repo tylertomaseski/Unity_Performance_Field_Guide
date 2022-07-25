@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Tommy;
 
 namespace Unity_Performance_Field_Guide
 {
@@ -14,7 +15,8 @@ namespace Unity_Performance_Field_Guide
 			if (Directory.Exists(dir) == false)
 				Directory.CreateDirectory(dir);
 
-			System.IO.File.WriteAllText(Path.Combine(dir, "Index.html"), "Lorem Ipsum");
+			File.WriteAllText(Path.Combine(dir, "Index.html"), "Lorem Ipsum");
+			File.Create(Path.Combine(dir, ".nojekyll"));
 		}
 	}
 }
