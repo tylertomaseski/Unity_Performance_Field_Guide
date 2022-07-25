@@ -10,7 +10,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    concurrency: ci-${{github.ref}}
+    # concurrency: ci-${{github.ref}}
 
     steps:
     - uses: actions/checkout@v3
