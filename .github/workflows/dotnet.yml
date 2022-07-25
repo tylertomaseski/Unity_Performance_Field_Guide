@@ -10,6 +10,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    # concurrency: ci-${{github.ref}}
 
     steps:
     - uses: actions/checkout@v3
@@ -19,5 +20,13 @@ jobs:
         dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore ./Unity-Performance-Field-Guide.sln
-    - name: Build
-      run: dotnet build ./Unity-Performance-Field-Guide.csproj --configuration Release --no-restore
+    # - name: Build
+    #   run: dotnet build ./Unity-Performance-Field-Guide.csproj --configuration Release --no-restore
+    - name: Run
+      run: dotnet run
+
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@4
+      with:
+        folder: output
+        branch: gh-pages
