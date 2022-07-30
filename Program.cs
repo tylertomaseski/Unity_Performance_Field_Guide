@@ -58,11 +58,25 @@ namespace Unity_Performance_Field_Guide
 
 		public static void GenerateBody(ref StringBuilder sb, string tipsDirectory)
 		{
+			var serializer = new XmlSerializer(typeof(Tip));
+
 			var allTips = Directory.EnumerateFiles(tipsDirectory);
 			foreach (var tipPath in allTips)
 			{
 				string tipContents = File.ReadAllText(tipPath);
-				sb.Append(tipContents);
+
+				Tip tip;
+
+				using (TextReader reader = new StringReader(tipContents))
+				{
+					tip = (Tip) serializer.Deserialize(reader);
+				}
+
+				sb.Append($"<h2>{tip.Title}</h2>");
+				sb.Append($"<h4>Difficulty: {tip.Difficulty}</h4>");
+				sb.Append($"<p><b>Instead of </b>{tip.InsteadOf}</p>");
+				sb.Append($"<p><b>Try </b>{tip.Try}</p>");
+				sb.Append($"<p><b>Because </b>{tip.Because}</p>");
 			}
 		}
 
