@@ -1,0 +1,1 @@
+npx @11ty/eleventy --serve --formats=html,gif,liquid --input=src --output=_site

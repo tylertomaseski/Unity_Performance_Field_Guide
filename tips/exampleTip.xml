@@ -1,7 +1,0 @@
-﻿<Tip>
-  <Title>Example Tip</Title>
-  <InsteadOf>Creating a website from scratch</InsteadOf>
-  <Try>Make a generator!</Try>
-  <Because>Adding tips later will be easy.</Because>
-  <Difficulty>0.5</Difficulty>
-</Tip>

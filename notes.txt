@@ -1,0 +1,3 @@
+run 
+npx @11ty/eleventy --serve --formats=html,gif
+to generate and preview the site
