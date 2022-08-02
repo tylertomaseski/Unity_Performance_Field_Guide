@@ -1,0 +1,66 @@
+---
+title: Unity Performance Field Guide
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{{ title }}</title>
+        <link rel="stylesheet" href="spectre.min.css">
+        <link rel="stylesheet" href="spectre-exp.min.css">
+        <link rel="stylesheet" href="spectre-icons.min.css">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <header class="navbar" style="padding: 1rem; box-shadow: 2px 2px 2px lightgrey;">
+            <section class="navbar-primary">
+                <a href="..." class="navbar-brand mr-2">{{ title }}</a>
+            </section>
+            <section class="navbar-section">
+                <a href="..." class="btn btn-link">Docs</a>
+                <a href="..." class="btn btn-link">GitHub</a>
+            </section>
+            <section class="navbar-section">
+                <div class="input-group input-inline">
+                    <input class="form-input" type="text" placeholder="search">
+                    <button class="btn btn-primary input-group-btn">Search</button>
+                </div>
+            </section>
+        </header>
+
+        <div class="container grid-lg centered">
+            <div class="columns">
+                {%- for post in collections.tip -%}
+
+                    <div class="column col-12">
+                        <h2>{{ post.data.title }}</h2>
+                    </div>
+
+                    <div class="column col-8 col-md-12">
+                        <p>
+                            <strong>Instead of...</strong><br/>
+                            {{ post.data.instead-of }}
+                        </p>
+                    </div>
+                    <div class="column col-4 col-md-12">
+                        <p>
+                            code example
+                        </p>
+                    </div>
+                    <p>
+                        <strong>Try...</strong><br/>
+                        {{ post.data.try }}
+                    </p>
+                    <p>
+                        <strong>Because...</strong><br/>
+                        {{ post.data.because }}
+                    </p>
+                {%- endfor -%}
+
+                <div class="column col-4">Code example</div>
+            </div>
+        </div>
+
+    </body>
+</html>
