@@ -14,10 +14,8 @@ title: Unity Performance Field Guide
     </head>
     <body>
         <header class="navbar" style="padding: 1rem; box-shadow: 2px 2px 2px lightgrey;">
-            <section class="navbar-primary">
-                <a href="..." class="navbar-brand mr-2">{{ title }}</a>
-            </section>
             <section class="navbar-section">
+                <a href="..." class="navbar-brand mr-2">{{ title }}</a>
                 <a href="..." class="btn btn-link">Docs</a>
                 <a href="..." class="btn btn-link">GitHub</a>
             </section>
@@ -30,37 +28,65 @@ title: Unity Performance Field Guide
         </header>
 
         <div class="container grid-lg centered">
-            <div class="columns">
-                {%- for post in collections.tip -%}
-
-                    <div class="column col-12">
+            {%- for post in collections.tip -%}
+                <div class="columns">
+                    <div class="column col-9 col-sm-12">
                         <h2>{{ post.data.title }}</h2>
                     </div>
 
-                    <div class="column col-8 col-md-12">
+                    <div class="column col-3 col-sm-12 panel">
+                        <h6 class="" style="text-align: center;">Difficulty</h6>
+                        <ul class="step">
+                            <li class="step-item">
+                                <a href="#" class="tooltip" data-tooltip="Trivial">1</a>
+                            </li>
+                            <li class="step-item active">
+                                <a href="#" class="tooltip" data-tooltip="Worthwhile, but non-trivial">2</a>
+                            </li>
+                            <li class="step-item">
+                                <a href="#" class="tooltip" data-tooltip="Difficult, but worthwhile if you have the time">3</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- INSTEAD OF -->
+                    <div class="column col-4 col-md-12">
                         <p>
                             <strong>Instead of...</strong><br/>
                             {{ post.data.instead-of }}
                         </p>
                     </div>
+                    <div class="column col-8 col-md-12">
+                        <pre class="code" data-lang="C#"><code><span class="com">
+                            code example
+                        </span></code></pre>
+                    </div>
+
+                    <!-- TRY -->
                     <div class="column col-4 col-md-12">
                         <p>
-                            code example
+                            <strong>Try instead...</strong><br/>
+                            {{ post.data.try }}
                         </p>
                     </div>
-                    <p>
-                        <strong>Try...</strong><br/>
-                        {{ post.data.try }}
-                    </p>
-                    <p>
-                        <strong>Because...</strong><br/>
-                        {{ post.data.because }}
-                    </p>
-                {%- endfor -%}
+                    <div class="column col-8 col-md-12">
+                        <pre class="code" data-lang="C#"><code><span class="com">
+                            code example
+                        </span></code></pre>
+                    </div>
 
-                <div class="column col-4">Code example</div>
-            </div>
+                    <!-- BECAUSE -->
+                    <div class="column col-12">
+                        <p>
+                            <strong>Because...</strong><br/>
+                            {{ post.data.because }}
+                        </p>
+                    </div>
+                </div>
+                <!-- End COLUMNS -->
+            {%- endfor -%}
+
         </div>
-
+        <!-- End CONTAINER -->
     </body>
 </html>
