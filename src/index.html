@@ -45,13 +45,14 @@ title: Unity Performance Field Guide
                         <div class="column col-3 col-sm-12 panel">
                             <h6 class="" style="text-align: center;">Difficulty</h6>
                             <ul class="step">
-                                <li class="step-item">
+                                <!-- Switch to shortcode for this conditional -->
+                                <li class="{%- if post.data.difficulty == 0 -%}step-item active {%- else -%}step-item{%- endif -%}">
                                     <a href="#" class="tooltip" data-tooltip="Trivial">1</a>
                                 </li>
-                                <li class="step-item active">
+                                <li class="{%- if post.data.difficulty == 1 -%}step-item active {%- else -%}step-item{%- endif -%}">
                                     <a href="#" class="tooltip" data-tooltip="Worthwhile, but non-trivial">2</a>
                                 </li>
-                                <li class="step-item">
+                                <li class="{%- if post.data.difficulty == 2 -%}step-item active {%- else -%}step-item{%- endif -%}">
                                     <a href="#" class="tooltip" data-tooltip="Difficult, but worthwhile if you have the time">3</a>
                                 </li>
                             </ul>
@@ -61,13 +62,11 @@ title: Unity Performance Field Guide
                         <div class="column col-4 col-md-12">
                             <p>
                                 <strong>Instead of...</strong><br/>
-                                {{ post.data.instead-of }}
+                                {{ post.data.instead_of }}
                             </p>
                         </div>
                         <div class="column col-8 col-md-12">
-                            <pre class="code" data-lang="C#"><code><span class="com">
-                                {{ post.data.dummy_tag }}
-                            </span></code></pre>
+                            <pre class="code" data-lang="C#"><code><span class="com">{{ post.data.bad_example }}</span></code></pre>
                         </div>
 
                         <!-- TRY -->
@@ -78,9 +77,7 @@ title: Unity Performance Field Guide
                             </p>
                         </div>
                         <div class="column col-8 col-md-12">
-                            <pre class="code" data-lang="C#"><code><span class="com">
-                            code example
-                        </span></code></pre>
+                            <pre class="code" data-lang="C#"><code><span class="com">{{ post.data.good_example }}</span></code></pre>
                         </div>
 
                         <!-- BECAUSE -->

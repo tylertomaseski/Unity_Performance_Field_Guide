@@ -1,8 +1,10 @@
 ---
-title: Cache value of Count/Length for data structures
-instead-of: 'For (... ; i < array.Count; …)'
-try: 'Int count = array.Count;
-For (... ; i < count ; …)'
-because: 'C# doesn’t know if you edited the array, it’ll fetch the number from the array. Caching out the length/count is faster.'
+title: Check array length once in a for-loop
 difficulty: 0
 ---
+<!--section-->
+Checking a collections length inside the for-loop.
+<!--section-->
+Cache the collections length and use the cached int in the for-loop.
+<!--section-->
+The compiler doesn't know if you've edited the array, so it politely asks the collection every for-loop what it's length is. This isn't a hurculean task, but it takes a little time. And this adds up across your entire code-base!
