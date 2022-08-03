@@ -11,6 +11,7 @@ title: Unity Performance Field Guide
         <link rel="stylesheet" href="spectre-exp.min.css">
         <link rel="stylesheet" href="spectre-icons.min.css">
         <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://use.typekit.net/cvo3vmx.css">
     </head>
     <body>
         <header class="navbar" style="padding: 1rem; box-shadow: 2px 2px 2px lightgrey;">
@@ -42,7 +43,7 @@ title: Unity Performance Field Guide
                             <h2>{{ post.data.title }}</h2>
                         </div>
 
-                        <div class="column col-3 col-sm-12 panel">
+                        <div class="column col-3 col-sm-12 pt-2 panel">
                             <h6 class="" style="text-align: center;">Difficulty</h6>
                             <ul class="step">
                                 <!-- Switch to shortcode for this conditional -->
@@ -61,7 +62,7 @@ title: Unity Performance Field Guide
                         <!-- INSTEAD OF -->
                         <div class="column col-4 col-md-12">
                             <p>
-                                <strong>Instead of...</strong><br/>
+                                <h4>Instead of...</h4>
                                 {{ post.data.instead_of }}
                             </p>
                         </div>
@@ -72,7 +73,7 @@ title: Unity Performance Field Guide
                         <!-- TRY -->
                         <div class="column col-4 col-md-12">
                             <p>
-                                <strong>Try instead...</strong><br/>
+                                <h4>Try instead...</h4>
                                 {{ post.data.try }}
                             </p>
                         </div>
@@ -83,7 +84,7 @@ title: Unity Performance Field Guide
                         <!-- BECAUSE -->
                         <div class="column col-12">
                             <p>
-                                <strong>Because...</strong><br/>
+                                <h4>Because...</h4>
                                 {{ post.data.because }}
                             </p>
                         </div>
