@@ -15,6 +15,72 @@
         <meta content="https://unityfieldguide.com/" property="og:url"/>
         <meta content="https://unityfieldguide.com/img/Screenshot_1.png" property="og:image"/>
         <meta content="#5755D9" data-react-helmet="true" name="theme-color"/>
+
+        <script>
+            // a key map of allowed keys
+            var allowedKeys = {
+                37: 'left',
+                38: 'up',
+                39: 'right',
+                40: 'down',
+                68: 'd',
+                73: 'i',
+                71: 'g'
+            };
+
+            // the 'official' Konami Code sequence
+            var konamiCode = [
+                'up',
+                'down',
+                'up',
+                'down',
+                'd',
+                'i',
+                'g'
+            ];
+
+            // a variable to remember the 'position' the user has reached so far.
+            var konamiCodePosition = 0;
+
+            // add keydown event listener
+            document.addEventListener('keydown', function (e) {
+                // get the value of the key code from the key map
+                var key = allowedKeys[e.keyCode];
+                // get the value of the required key from the konami code
+                var requiredKey = konamiCode[konamiCodePosition];
+
+                // compare the key with the required key
+                if (key == requiredKey) {
+
+                    // move to the next key in the konami code sequence
+                    konamiCodePosition++;
+
+                    // if the last key is reached, activate cheats
+                    if (konamiCodePosition == konamiCode.length) {
+                        activateCheats();
+                        konamiCodePosition = 0;
+                    }
+                } else {
+                    konamiCodePosition = 0;
+                }
+            });
+
+            var hasRun = false;
+
+            function activateCheats() {
+
+                hasRun = true;
+                document
+                    .getElementById("secret")
+                    .style
+                    .display = "inline";
+
+                var audio = new Audio('audio/pling.mp3');
+                audio.play();
+
+                //alert("secret unlocked");
+            }
+        </script>
     </head>
     <body>
         <!--
@@ -45,7 +111,7 @@
 <div class="column col-5 col-md-12">
 <h4>Credits</h4>
 <p><strong>Curator + Editor:</strong> <a href="https://tylertomaseski.github.io/TyFolio/">Tyler Tomaseski</a><br />
-<strong>Optitmization Contributors:</strong> <br />Adam Strick, Scott Robertson, Liz Gravis, &amp; Tyler Tomaseski</p>
+<strong>Optitmization Contributors:</strong> <br /><span id="secret" style="display: none;">Soup, </span>Scott Robertson, Liz Gravis, &amp; Tyler Tomaseski</p>
 </div>
 <div class="column col-7 col-md-12">
 <h4>Disclaimer</h4>
@@ -555,7 +621,7 @@ GDX, an open-source collection of custom data-types geared towards gamedev and p
                             <h4>Because...</h4>
                             <p>
                                 
-C#'s built in data types are geared towards maximum flexibility and sacrifice performance for it. GDX is an amazing collection of gamedev oriented data-types with a performance-fist attitude.
+C#'s built in data types are geared towards maximum flexibility and sacrifice performance for it. GDX is an amazing collection of gamedev oriented data-types with a performance-first attitude.
 
 Getting the right data-type will not only be faster, but give you catered architecture to best solve your problems
                             </p>
