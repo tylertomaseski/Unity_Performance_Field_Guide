@@ -1,0 +1,250 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Unity Performance Field Guide</title>
+        <link rel="stylesheet" href="spectre.min.css">
+        <link rel="stylesheet" href="spectre-exp.min.css">
+        <link rel="stylesheet" href="spectre-icons.min.css">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://use.typekit.net/cvo3vmx.css">
+    </head>
+    <body>
+        <header class="navbar" style="padding: 1rem; box-shadow: 2px 2px 2px lightgrey;">
+            <section class="navbar-section">
+                <a href="./" class="navbar-brand mr-2">Unity Performance Field Guide</a>
+            </section>
+            <section class="navbar-section">
+                <a href="https://github.com/tylertomaseski/Unity-Performance-Field-Guide" class="btn btn-link">GitHub Repo</a>
+            </section>
+        </header>
+
+        <div class="container grid-lg centered filter">
+            <input type="radio" id="tag-0" class="filter-tag" name="filter-radio" hidden checked>
+            <input type="radio" id="tag-1" class="filter-tag" name="filter-radio" hidden>
+            <input type="radio" id="tag-2" class="filter-tag" name="filter-radio" hidden>
+            <input type="radio" id="tag-3" class="filter-tag" name="filter-radio" hidden>
+
+            <div class="columns">
+                <div class="column col-12 card mt-2 pt-2">
+                    <h1>The <small class="label">unofficial</small> Unity Performance Field Guide!</h1>
+                    <p><strong>If you follow some of the tips given here, you'll have to optimize a lot less later.</strong> The best way to optimize your game is to build good habits.</p>
+<p><strong>What’s the best way to optimize your game?</strong> <em><strong>It’s to write it performant in the first place!</strong></em> Performance is all about good habits, so you can write performant code without slowing down production. Part of why doing that is so hard, is that sometimes you don’t know the best way or the pitfalls of the engine until it’s too late. This field-guide is an attempt to articulate a series of from-the-trenches tips and tricks.</p>
+<p>The Unity Performance Field Guide is put together as an effort to concentrate knowledge shared in <a href="https://societyofplay.net/">Society of Play</a> community discussions into a single reference point.</p>
+<p><strong>Curator:</strong> Tyler Tomaseski<br />
+<strong>Contributors:</strong> Adam Strick, &amp; Liz Gravis</p>
+<p>Unity Performance Field-Guide is an <a href="https://github.com/tylertomaseski/Unity-Performance-Field-Guide">open-source project and can be found here</a>.</p>
+<p><strong>The Unity Field Guide is not officially supported or sponsored by Unity in any way.</strong></p>
+
+                </div>
+            </div>
+            <!-- end columns -->
+
+            <div class="columns">
+                <div class="column col-12 pt-2 mt-2">
+                    <h1 class=" mb-0">
+                        <center>The tips!</center>
+                    </h1>
+                </div>
+            </div>
+
+            <div class="filter-nav">
+                <strong>Filters:</strong>
+                <label class="chip" for="tag-0">All</label>
+                <label class="chip" for="tag-1">Code</label>
+                <label class="chip" for="tag-2">Art</label>
+                <label class="chip" for="tag-3">Engine</label>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="filter-body"><div class="columns filter-item" data-tag="tag-1">
+                        <div class="column col-9 col-sm-12">
+                            <h2 class="mb-0">Avoid default C# Data Structures</h2>
+                            <div class="ml-1">
+                                <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
+                        </div>
+
+                        <div class="column col-3 col-sm-12 pt-2 panel">
+                            <h6 class="" style="text-align: center;">Difficulty</h6>
+                            <ul class="step">
+                                <!-- Switch to shortcode for this conditional -->
+                                <li class="step-item active">
+                                    <a href="#" class="tooltip" data-tooltip="Trivial">1</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Worthwhile, but non-trivial">2</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Difficult, but worthwhile if you have the time">3</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- INSTEAD OF --><div class="column col-12">
+                            <h4>Instead of...</h4>
+                            <p>
+                                
+List, SparseSet, Dictionary, Etc.
+
+                            </p>
+                        </div><!-- TRY --><div class="column col-12">
+                            <h4>Try instead...</h4>
+                            <p>
+                                
+GDX, an open-source collection of custom data-types geared towards gamedev and performance.
+
+                            </p>
+                        </div><!-- BECAUSE -->
+                        <div class="column col-12">
+                            <h4>Because...</h4>
+                            <p>
+                                
+C#'s built in data types are geared towards maximum flexibility and sacrifice performance for it. GDX is an amazing collection of gamedev oriented data-types with a performance-fist attitude.
+
+Getting the right data-type will not only be faster, but give you catered architecture to best solve your problems
+                            </p>
+
+                            <div class="divider"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                    <!-- End COLUMNS --><div class="columns filter-item" data-tag="tag-1">
+                        <div class="column col-9 col-sm-12">
+                            <h2 class="mb-0">Check array length once in a for-loop</h2>
+                            <div class="ml-1">
+                                <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
+                        </div>
+
+                        <div class="column col-3 col-sm-12 pt-2 panel">
+                            <h6 class="" style="text-align: center;">Difficulty</h6>
+                            <ul class="step">
+                                <!-- Switch to shortcode for this conditional -->
+                                <li class="step-item active">
+                                    <a href="#" class="tooltip" data-tooltip="Trivial">1</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Worthwhile, but non-trivial">2</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Difficult, but worthwhile if you have the time">3</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- INSTEAD OF --><div class="column col-4 col-md-12">
+                                <h4>Instead of...</h4>
+                                <p>
+                                    
+Checking a collections length inside the for-loop.
+
+                                </p>
+                            </div>
+                        <div class="column col-8 col-md-12">
+                            <pre class="code" data-lang="C#"><code><span class="com">For (... ; i < collection.Count ; …)</span></code></pre>
+                        </div><!-- TRY --><div class="column col-4 col-md-12">
+                                <h4>Try instead...</h4>
+                                <p>
+                                    
+Cache the collections length and use the cached int in the for-loop.
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">Int count = collection.Count;
+For (… ; i < count ; …)</span></code></pre>
+                            </div><!-- BECAUSE -->
+                        <div class="column col-12">
+                            <h4>Because...</h4>
+                            <p>
+                                
+The compiler doesn't know if you've edited the array, so it politely asks the collection every for-loop what it's length is. This isn't a hurculean task, but it takes a little time. And this adds up across your entire code-base! 
+                            </p>
+
+                            <div class="divider"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                    <!-- End COLUMNS --><div class="columns filter-item" data-tag="tag-1">
+                        <div class="column col-9 col-sm-12">
+                            <h2 class="mb-0">Check array length once in a for-loop</h2>
+                            <div class="ml-1">
+                                <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
+                        </div>
+
+                        <div class="column col-3 col-sm-12 pt-2 panel">
+                            <h6 class="" style="text-align: center;">Difficulty</h6>
+                            <ul class="step">
+                                <!-- Switch to shortcode for this conditional -->
+                                <li class="step-item active">
+                                    <a href="#" class="tooltip" data-tooltip="Trivial">1</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Worthwhile, but non-trivial">2</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Difficult, but worthwhile if you have the time">3</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- INSTEAD OF --><div class="column col-4 col-md-12">
+                                <h4>Instead of...</h4>
+                                <p>
+                                    
+Checking a collections length inside the for-loop.
+
+                                </p>
+                            </div>
+                        <div class="column col-8 col-md-12">
+                            <pre class="code" data-lang="C#"><code><span class="com">for (... ; i < collection.Count ; …)
+{
+    …
+}</span></code></pre>
+                        </div><!-- TRY --><div class="column col-4 col-md-12">
+                                <h4>Try instead...</h4>
+                                <p>
+                                    
+Cache the collections length and use the cached int in the for-loop.
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">Int count = collection.Count;
+for (… ; i < count ; …)
+{
+    …
+}</span></code></pre>
+                            </div><!-- BECAUSE -->
+                        <div class="column col-12">
+                            <h4>Because...</h4>
+                            <p>
+                                
+The compiler doesn't know if you've edited the array, so it politely asks the collection every for-loop what it's length is. This isn't a hurculean task, but it takes a little time. And this adds up across your entire code-base!
+                            </p>
+
+                            <div class="divider"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                    <!-- End COLUMNS --></div>
+            <!-- end filter body -->
+
+            <div class="hero bg-gray">
+                <div class="hero-body">
+                    <h1>
+                        <center>Good luck out there!</center>
+                    </h1>
+                    <p>
+                        <center>We're rooting for you!</center>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- End CONTAINER -->
+    </body>
+</html>

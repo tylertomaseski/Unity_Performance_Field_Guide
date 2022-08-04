@@ -1,0 +1,42 @@
+/* .container {
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+} */
+
+.container {
+    padding-bottom: 400px;
+}
+
+h1,
+h2 {
+    font-family: sommet-slab, serif;
+    font-weight: 800;
+    font-style: italic;
+}
+
+h3,
+h4 {
+    font-family: sommet-slab, serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+h5,
+h6 {
+    font-family: tgn-soft-round, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+body {
+    font-family: tgn-soft-round, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.chip {
+    font-family: tgn-soft-round, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
