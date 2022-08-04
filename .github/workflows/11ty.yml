@@ -1,0 +1,30 @@
+name: 11ty Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    # concurrency: ci-${{github.ref}}
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install dependencies & build
+      run: npx @11ty/eleventy
+
+    # - name: Build
+    #   run: dotnet build ./Unity-Performance-Field-Guide.csproj --configuration Release --no-restore
+    - name: Run
+      run: sh buildsite.sh
+
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: _site
+        branch: gh-pages
