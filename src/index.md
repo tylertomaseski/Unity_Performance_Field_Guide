@@ -9,7 +9,7 @@ Part of why doing that is so hard, is that sometimes you don’t know the best w
 
 This guide is an effort to concentrate knowledge from [Society of Play](https://societyofplay.net/) community discussions into a single reference point.
 
-**Curator + Writer:** Tyler Tomaseski<br />
+**Curator + Writer:** [Tyler Tomaseski](https://tylertomaseski.github.io/TyFolio/)<br />
 **Optitmization Contributors:** Adam Strick, Scott Robertson, & Liz Gravis
 
 
