@@ -42,4 +42,10 @@ body {
     font-style: normal;
 }
 
-;
+p {
+    font-size: large;
+}
+
+code {
+    font-size: medium;
+}
