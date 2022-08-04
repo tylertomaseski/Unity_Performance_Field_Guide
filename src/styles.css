@@ -4,6 +4,10 @@
     margin-right: auto;
 } */
 
+.container {
+    padding-bottom: 400px;
+}
+
 h1,
 h2 {
     font-family: sommet-slab, serif;
@@ -20,7 +24,19 @@ h4 {
 
 h5,
 h6 {
-    font-family: sommet-slab, serif;
-    font-weight: 300;
-    font-style: italic;
+    font-family: tgn-soft-round, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+body {
+    font-family: tgn-soft-round, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.chip {
+    font-family: tgn-soft-round, sans-serif;
+    font-weight: 700;
+    font-style: normal;
 }

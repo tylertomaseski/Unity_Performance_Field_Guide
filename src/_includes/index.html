@@ -1,0 +1,174 @@
+---
+title: Unity Performance Field Guide
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{{ title }}</title>
+        <link rel="stylesheet" href="spectre.min.css">
+        <link rel="stylesheet" href="spectre-exp.min.css">
+        <link rel="stylesheet" href="spectre-icons.min.css">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://use.typekit.net/cvo3vmx.css">
+    </head>
+    <body>
+        <header class="navbar" style="padding: 1rem; box-shadow: 2px 2px 2px lightgrey;">
+            <section class="navbar-section">
+                <a href="./" class="navbar-brand mr-2">{{ title }}</a>
+            </section>
+            <section class="navbar-section">
+                <a href="https://github.com/tylertomaseski/Unity-Performance-Field-Guide" class="btn btn-link">GitHub Repo</a>
+            </section>
+        </header>
+
+        <div class="container grid-lg centered filter">
+            <input type="radio" id="tag-0" class="filter-tag" name="filter-radio" hidden checked>
+            <input type="radio" id="tag-1" class="filter-tag" name="filter-radio" hidden>
+            <input type="radio" id="tag-2" class="filter-tag" name="filter-radio" hidden>
+            <input type="radio" id="tag-3" class="filter-tag" name="filter-radio" hidden>
+
+            <div class="columns">
+                <div class="column col-12 card mt-2 pt-2">
+                    <h1>The <small class="label">unofficial</small> Unity Performance Field Guide!</h1>
+                    {{ content }}
+                </div>
+            </div>
+            <!-- end columns -->
+
+            <div class="columns">
+                <div class="column col-12 pt-2 mt-2">
+                    <h1 class=" mb-0">
+                        <center>The tips!</center>
+                    </h1>
+                </div>
+            </div>
+
+            <div class="filter-nav">
+                <strong>Filters:</strong>
+                <label class="chip" for="tag-0">All</label>
+                <label class="chip" for="tag-1">Code</label>
+                <label class="chip" for="tag-2">Art</label>
+                <label class="chip" for="tag-3">Engine</label>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="filter-body">
+                {%- for post in collections.tip -%}
+                    <div class="columns filter-item" data-tag="
+                                {%- if post.data.code == 1 -%}
+                                    tag-1
+                                {%- endif -%}
+                                {%- if post.data.art == 1 -%}
+                                    tag-2
+                                {%- endif -%}
+                                {%- if post.data.engine == 1 -%}
+                                    tag-2
+                                {%- endif -%}">
+                        <div class="column col-9 col-sm-12">
+                            <h2 class="mb-0">{{ post.data.title }}</h2>
+                            <div class="ml-1">
+                                <i class="ml-1">Tags: </i>
+                                {%- if post.data.code == 1 -%}
+                                    <span class="chip">Code</span>
+                                {%- endif -%}
+                                {%- if post.data.art == 1 -%}
+                                    <span class="chip">Art</span>
+                                {%- endif -%}
+                                {%- if post.data.engine == 1 -%}
+                                    <span class="chip">Engine</span>
+                                {%- endif -%}
+                            </div>
+                        </div>
+
+                        <div class="column col-3 col-sm-12 pt-2 panel">
+                            <h6 class="" style="text-align: center;">Difficulty</h6>
+                            <ul class="step">
+                                <!-- Switch to shortcode for this conditional -->
+                                <li class="{%- if post.data.difficulty == 1 -%}step-item active {%- else -%}step-item{%- endif -%}">
+                                    <a href="#" class="tooltip" data-tooltip="Trivial">1</a>
+                                </li>
+                                <li class="{%- if post.data.difficulty == 2 -%}step-item active {%- else -%}step-item{%- endif -%}">
+                                    <a href="#" class="tooltip" data-tooltip="Worthwhile, but non-trivial">2</a>
+                                </li>
+                                <li class="{%- if post.data.difficulty == 3 -%}step-item active {%- else -%}step-item{%- endif -%}">
+                                    <a href="#" class="tooltip" data-tooltip="Difficult, but worthwhile if you have the time">3</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- INSTEAD OF -->
+                        {%- if post.data.good_example != 0 -%}
+                            <div class="column col-4 col-md-12">
+                                <h4>Instead of...</h4>
+                                <p>
+                                    {{ post.data.instead_of }}
+                                </p>
+                            </div>
+                        <div class="column col-8 col-md-12">
+                            <pre class="code" data-lang="C#"><code><span class="com">{{ post.data.bad_example }}</span></code></pre>
+                        </div>
+                        {%- else -%}
+                        <div class="column col-12">
+                            <h4>Instead of...</h4>
+                            <p>
+                                {{ post.data.instead_of }}
+                            </p>
+                        </div>
+                        {%- endif -%}
+
+                        <!-- TRY -->
+                        {%- if post.data.good_example != 0 -%}
+                            <div class="column col-4 col-md-12">
+                                <h4>Try instead...</h4>
+                                <p>
+                                    {{ post.data.try }}
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">{{ post.data.good_example }}</span></code></pre>
+                            </div>
+                        {%- else -%}
+                        <div class="column col-12">
+                            <h4>Try instead...</h4>
+                            <p>
+                                {{ post.data.try }}
+                            </p>
+                        </div>
+                        {%- endif -%}
+
+                        <!-- BECAUSE -->
+                        <div class="column col-12">
+                            <h4>Because...</h4>
+                            <p>
+                                {{ post.data.because }}
+                            </p>
+
+                            <div class="divider"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                    <!-- End COLUMNS -->
+
+                {%- endfor -%}
+
+            </div>
+            <!-- end filter body -->
+
+            <div class="hero bg-gray">
+                <div class="hero-body">
+                    <h1>
+                        <center>Good luck out there!</center>
+                    </h1>
+                    <p>
+                        <center>We're rooting for you!</center>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- End CONTAINER -->
+    </body>
+</html>
