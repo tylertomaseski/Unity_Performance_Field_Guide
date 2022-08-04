@@ -1,1 +1,0 @@
-npx @11ty/eleventy --formats=html,gif,liquid,md,css,toml --input=src --output=_site
