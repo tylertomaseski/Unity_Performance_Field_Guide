@@ -18,6 +18,72 @@ title: Unity Performance Field Guide
         <meta content="https://unityfieldguide.com/" property="og:url"/>
         <meta content="https://unityfieldguide.com/img/Screenshot_1.png" property="og:image"/>
         <meta content="#5755D9" data-react-helmet="true" name="theme-color"/>
+
+        <script>
+            // a key map of allowed keys
+            var allowedKeys = {
+                37: 'left',
+                38: 'up',
+                39: 'right',
+                40: 'down',
+                68: 'd',
+                73: 'i',
+                71: 'g'
+            };
+
+            // the 'official' Konami Code sequence
+            var konamiCode = [
+                'up',
+                'down',
+                'up',
+                'down',
+                'd',
+                'i',
+                'g'
+            ];
+
+            // a variable to remember the 'position' the user has reached so far.
+            var konamiCodePosition = 0;
+
+            // add keydown event listener
+            document.addEventListener('keydown', function (e) {
+                // get the value of the key code from the key map
+                var key = allowedKeys[e.keyCode];
+                // get the value of the required key from the konami code
+                var requiredKey = konamiCode[konamiCodePosition];
+
+                // compare the key with the required key
+                if (key == requiredKey) {
+
+                    // move to the next key in the konami code sequence
+                    konamiCodePosition++;
+
+                    // if the last key is reached, activate cheats
+                    if (konamiCodePosition == konamiCode.length) {
+                        activateCheats();
+                        konamiCodePosition = 0;
+                    }
+                } else {
+                    konamiCodePosition = 0;
+                }
+            });
+
+            var hasRun = false;
+
+            function activateCheats() {
+
+                hasRun = true;
+                document
+                    .getElementById("secret")
+                    .style
+                    .display = "inline";
+
+                var audio = new Audio('audio/pling.mp3');
+                audio.play();
+
+                //alert("secret unlocked");
+            }
+        </script>
     </head>
     <body>
         <!--

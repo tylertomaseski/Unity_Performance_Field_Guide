@@ -16,7 +16,7 @@ This guide is an effort to concentrate knowledge from [Society of Play](https://
 
 #### Credits
 **Curator + Editor:** [Tyler Tomaseski](https://tylertomaseski.github.io/TyFolio/)<br />
-**Optitmization Contributors:** <br />Adam Strick, Scott Robertson, Liz Gravis, & Tyler Tomaseski
+**Optitmization Contributors:** <br /><span id="secret" style="display: none;">Soup, </span>Scott Robertson, Liz Gravis, & Tyler Tomaseski
 
 </div>
 
