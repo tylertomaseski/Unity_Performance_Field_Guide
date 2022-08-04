@@ -1,1 +1,0 @@
-For (... ; i < collection.Count ; …)
