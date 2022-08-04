@@ -1,0 +1,7 @@
+TMPro frequent SetText() calls
+<!--instead-of-->
+<p>TMPro.TMP_Base.SetText() every frame</p>
+<!--try-->
+<p>Set once, only update when the text changes!</p>
+<!--because-->
+<p>Rebuilding TMPro text meshes is slow and it does it every time you set the text value! And so is its rich text support. Avoid setting text unless the contents have changed.</p>

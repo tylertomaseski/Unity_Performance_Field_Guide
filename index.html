@@ -189,6 +189,174 @@ Every time you pass a string to an animator, it will "hash" the string. Which is
                             <br/>
                         </div>
                     </div>
+                    <!-- End COLUMNS --><div class="columns filter-item" data-tag="tag-1tag-2">
+                        <div class="column col-9 col-sm-12">
+                            <h2 class="mb-0 label label-primary">FPS conditional FX</h2>
+                            <div class="ml-1">
+                                <i class="ml-1">Tags: </i><span class="chip">Code</span><span class="chip">Art</span></div>
+                        </div>
+
+                        <div class="column col-3 col-sm-12 pt-2 panel label label-secondary">
+                            <h6 class="" style="text-align: center;">Difficulty</h6>
+                            <ul class="step">
+                                <!-- Switch to shortcode for this conditional -->
+                                <li class="step-item active">
+                                    <a href="#" class="tooltip" data-tooltip="Trivial">1</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Worthwhile, but non-trivial">2</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Difficult, but worthwhile if you have the time">3</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- INSTEAD OF --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-error">Instead of...</h4>
+                                <p>
+                                    
+Spawning all fx.
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">void SpawnFX() {
+    GameObject.Instantiate(/*...*/);
+}</span></code></pre>
+                            </div><!-- TRY --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-success">Try instead...</h4>
+                                <p>
+                                    
+Don't spawn some fx when FPS is low or when off-screen.
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">void SpawnFX() {
+    //only spawn if framerate is higher than 25fps
+    if (Time.deltaTime < 1.0f / 25.0f)
+        GameObject.Instantiate(/*...*/);
+}</span></code></pre>
+                            </div><!-- BECAUSE -->
+                        <div class="column col-12">
+                            <h4>Because...</h4>
+                            <p>
+                                
+Some FX may not be critical to your game (like footstep dust). Try not spawning it or limiting it while the game's FPS is low.
+                            </p>
+
+                            <div class="divider"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                    <!-- End COLUMNS --><div class="columns filter-item" data-tag="tag-1">
+                        <div class="column col-9 col-sm-12">
+                            <h2 class="mb-0 label label-primary">Update ticketing/queuing</h2>
+                            <div class="ml-1">
+                                <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
+                        </div>
+
+                        <div class="column col-3 col-sm-12 pt-2 panel label label-secondary">
+                            <h6 class="" style="text-align: center;">Difficulty</h6>
+                            <ul class="step">
+                                <!-- Switch to shortcode for this conditional -->
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Trivial">1</a>
+                                </li>
+                                <li class="step-item active">
+                                    <a href="#" class="tooltip" data-tooltip="Worthwhile, but non-trivial">2</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Difficult, but worthwhile if you have the time">3</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- INSTEAD OF --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-error">Instead of...</h4>
+                                <p>
+                                    
+Doing everything every frame no matter the framerate.
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">public class AI : MonoBehaviour {
+    void FixedUpdate() {
+        UpdateAiFSM();
+        Move();
+    }
+
+    //...
+}</span></code></pre>
+                            </div><!-- TRY --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-success">Try instead...</h4>
+                                <p>
+                                    
+Take turns running certain logic. So some things only update every X frames.
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">[DefaultExecutionOrder(-1000)]
+public class UpdateQueue : MonoBehaviour
+{
+    public static int UpdateQueueTicketNumber;
+    public static int UpdateQueueIndex;
+    public const int QueueLength = 5; //conditional logic updates every 5th frame
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static int GetQueueTicket() {
+        UpdateQueueTicketNumber++;
+        UpdateQueueTicketNumber %= QueueLength;
+        return UpdateQueueTicketNumber;
+    }
+
+    public static bool ShouldUpdate(int ticketNumber) {
+        return UpdateQueueIndex == ticketNumber;
+    }
+
+    void FixedUpdate() {
+        UpdateQueueIndex++;
+        UpdateQueueIndex %= QueueLength;
+    }
+}
+
+//...
+
+public class AI : MonoBehaviour {
+    int ticketNumber;
+
+    void Awake() {
+        ticketNumber = UpdateQueue.GetQueueTicket();
+    }
+    
+    void FixedUpdate() {
+        if (UpdateQueue.ShouldUpdate(ticketNumber))
+            UpdateAiFSM();
+        Move();
+    }
+
+    //...
+}</span></code></pre>
+                            </div><!-- BECAUSE -->
+                        <div class="column col-12">
+                            <h4>Because...</h4>
+                            <p>
+                                
+Some logic, like AI, may not need to "think" every frame. Your slime enemies need to move every frame, but probably only need to "think" every X frames.
+<br /> <br />
+A simple ticketing system can allow non-frame dependent logic to run less frequently. This will help distribute your logic across multiple frames.
+
+                            </p>
+
+                            <div class="divider"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
                     <!-- End COLUMNS --><div class="columns filter-item" data-tag="tag-1">
                         <div class="column col-9 col-sm-12">
                             <h2 class="mb-0 label label-primary">Empty Start(), Update(), Etc...</h2>
@@ -244,6 +412,176 @@ Deleting them!
                             <p>
                                 
 Turns out Unity will not optimize out those functions that they put there for you. Remember that Start function in every MonoBehaviour that you left there? They're slowing you down. Delete 'em!
+                            </p>
+
+                            <div class="divider"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                    <!-- End COLUMNS --><div class="columns filter-item" data-tag="tag-1">
+                        <div class="column col-9 col-sm-12">
+                            <h2 class="mb-0 label label-primary">Game Initialization</h2>
+                            <div class="ml-1">
+                                <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
+                        </div>
+
+                        <div class="column col-3 col-sm-12 pt-2 panel label label-secondary">
+                            <h6 class="" style="text-align: center;">Difficulty</h6>
+                            <ul class="step">
+                                <!-- Switch to shortcode for this conditional -->
+                                <li class="step-item active">
+                                    <a href="#" class="tooltip" data-tooltip="Trivial">1</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Worthwhile, but non-trivial">2</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Difficult, but worthwhile if you have the time">3</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- INSTEAD OF --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-error">Instead of...</h4>
+                                <p>
+                                    
+Static initializers or static constructors for static variables. Multiple [InitializeOnLoad].
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">public static class Globals {
+    static Vector3 GlobalVal1 = new Vector3(...);
+    static float GlobalVal2 = ...;
+    static SomeClass GlobalVal3 = ...;
+    static SomeClass[] GlobalVal4 = new SomeClass[...];
+
+    static Globals() {}
+}
+
+public static class InitClass1 {
+    [InitializeOnLoad]
+    static void SomeInitMethod() {}
+}
+
+public static class InitClass2 {
+    [InitializeOnLoad]
+    static void SomeInitMethod() {}
+}</span></code></pre>
+                            </div><!-- TRY --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-success">Try instead...</h4>
+                                <p>
+                                    
+Create one specific unified initialization routine to run for each of Unity’s initialization callbacks and attributes (like [InitializeOnLoad]).
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">public static class GameInitialization {
+    [InitializeOnLoad]
+    static void GameInitializationRunner() {
+        Globals.InitGlobals();
+        InitClass1.SomeInitMethod();
+        InitClass2.SomeInitMethod();
+    }
+}
+
+public static class Globals {
+    static Vector3 GlobalVal1;
+    static float GlobalVal2;
+    static SomeClass GlobalVal3;
+    static SomeClass[] GlobalVal4;
+
+    static void InitGlobals() {
+        //initialize values
+        //...
+    }
+}
+
+public static class InitClass1 {
+    static void SomeInitMethod() {}
+}
+
+public static class InitClass2 {
+    static void SomeInitMethod() {}
+}</span></code></pre>
+                            </div><!-- BECAUSE -->
+                        <div class="column col-12">
+                            <h4>Because...</h4>
+                            <p>
+                                
+Static initializers make editor performance slower during startup, compiling, play mode entry/exit, and a few other places. They also inject a small amount of overhead for any code that accesses the class with the static initializer or constructor, which adds up.
+
+                            </p>
+
+                            <div class="divider"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                    <!-- End COLUMNS --><div class="columns filter-item" data-tag="tag-1">
+                        <div class="column col-9 col-sm-12">
+                            <h2 class="mb-0 label label-primary">TMPro frequent SetText() calls</h2>
+                            <div class="ml-1">
+                                <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
+                        </div>
+
+                        <div class="column col-3 col-sm-12 pt-2 panel label label-secondary">
+                            <h6 class="" style="text-align: center;">Difficulty</h6>
+                            <ul class="step">
+                                <!-- Switch to shortcode for this conditional -->
+                                <li class="step-item active">
+                                    <a href="#" class="tooltip" data-tooltip="Trivial">1</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Worthwhile, but non-trivial">2</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Difficult, but worthwhile if you have the time">3</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- INSTEAD OF --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-error">Instead of...</h4>
+                                <p>
+                                    
+TMPro.TMP_Base.SetText() every frame
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">TMP_Text textComponent;
+
+void Update() {
+    this.textComponent.SetText((int)Time.time);
+}</span></code></pre>
+                            </div><!-- TRY --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-success">Try instead...</h4>
+                                <p>
+                                    
+Set once, only update when the text changes!
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">TMP_Text textComponent;
+int lastVal = -1;
+
+void Update() {
+    int val = (int)Time.time;
+    if (val != lastVal) {
+        lastVal = val;
+        this.textComponent.SetText(val);
+    }
+}</span></code></pre>
+                            </div><!-- BECAUSE -->
+                        <div class="column col-12">
+                            <h4>Because...</h4>
+                            <p>
+                                
+Rebuilding TMPro text meshes is slow and it does it every time you set the text value! And so is its rich text support. Avoid setting text unless the contents have changed.
                             </p>
 
                             <div class="divider"></div>
@@ -345,10 +683,10 @@ Transform access is slow. It involves expensive managed/native interop and struc
                             <h6 class="" style="text-align: center;">Difficulty</h6>
                             <ul class="step">
                                 <!-- Switch to shortcode for this conditional -->
-                                <li class="step-item">
+                                <li class="step-item active">
                                     <a href="#" class="tooltip" data-tooltip="Trivial">1</a>
                                 </li>
-                                <li class="step-item active">
+                                <li class="step-item">
                                     <a href="#" class="tooltip" data-tooltip="Worthwhile, but non-trivial">2</a>
                                 </li>
                                 <li class="step-item">

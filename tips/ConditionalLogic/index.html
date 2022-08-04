@@ -1,0 +1,9 @@
+Update ticketing/queuing
+<!--instead-of-->
+<p>Doing everything every frame no matter the framerate.</p>
+<!--try-->
+<p>Take turns running certain logic. So some things only update every X frames.</p>
+<!--because-->
+<p>Some logic, like AI, may not need to &quot;think&quot; every frame. Your slime enemies need to move every frame, but probably only need to &quot;think&quot; every X frames.
+<br /> <br />
+A simple ticketing system can allow non-frame dependent logic to run less frequently. This will help distribute your logic across multiple frames.</p>
