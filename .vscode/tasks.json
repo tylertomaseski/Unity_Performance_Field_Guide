@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+  
+    "tasks": [
+      {
+        "label": "create tip",
+  
+        "command": "touch 'src/tips/${input:dirName}.md'  'src/tips/${input:dirName}.bad_example.cs'  'src/tips/${input:dirName}.good_example.cs'",
+  
+        "type": "shell",
+        "problemMatcher": [],
+        "presentation": {
+          "echo": false,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": false,
+          "clear": true
+        },
+     }
+  ],  
+  
+  // ........................................................................................
+    
+    "inputs": [
+  
+      {
+        "type": "promptString",
+        "id": "dirName",
+        "description": "Complete my folder name",
+        "default": "jsx folder to create"
+      }
+    ]
+  }
+  

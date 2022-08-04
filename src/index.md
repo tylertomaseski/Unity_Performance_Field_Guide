@@ -10,7 +10,7 @@ layout: index.html
 The Unity Performance Field Guide is put together as an effort to concentrate knowledge shared in [Society of Play](https://societyofplay.net/) community discussions into a single reference point.
 
 **Curator:** Tyler Tomaseski<br />
-**Contributors:** Adam Strick, & Liz Gravis
+**Contributors:** Adam Strick, Scott Robertson, & Liz Gravis
 
 
 Unity Performance Field-Guide is an [open-source project and can be found here](https://github.com/tylertomaseski/Unity-Performance-Field-Guide). 

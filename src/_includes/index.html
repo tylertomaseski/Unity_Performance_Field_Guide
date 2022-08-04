@@ -102,23 +102,23 @@ title: Unity Performance Field Guide
                         </div>
 
                         <!-- INSTEAD OF -->
-                        {%- if post.data.good_example != 0 -%}
+                        {%- if post.data.bad_example != 0 -%}
                             <div class="column col-4 col-md-12">
                                 <h4>Instead of...</h4>
                                 <p>
                                     {{ post.data.instead_of }}
                                 </p>
                             </div>
-                        <div class="column col-8 col-md-12">
-                            <pre class="code" data-lang="C#"><code><span class="com">{{ post.data.bad_example }}</span></code></pre>
-                        </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">{{ post.data.bad_example }}</span></code></pre>
+                            </div>
                         {%- else -%}
-                        <div class="column col-12">
-                            <h4>Instead of...</h4>
-                            <p>
-                                {{ post.data.instead_of }}
-                            </p>
-                        </div>
+                            <div class="column col-12">
+                                <h4>Instead of...</h4>
+                                <p>
+                                    {{ post.data.instead_of }}
+                                </p>
+                            </div>
                         {%- endif -%}
 
                         <!-- TRY -->
@@ -133,12 +133,12 @@ title: Unity Performance Field Guide
                                 <pre class="code" data-lang="C#"><code><span class="com">{{ post.data.good_example }}</span></code></pre>
                             </div>
                         {%- else -%}
-                        <div class="column col-12">
-                            <h4>Try instead...</h4>
-                            <p>
-                                {{ post.data.try }}
-                            </p>
-                        </div>
+                            <div class="column col-12">
+                                <h4>Try instead...</h4>
+                                <p>
+                                    {{ post.data.try }}
+                                </p>
+                            </div>
                         {%- endif -%}
 
                         <!-- BECAUSE -->
