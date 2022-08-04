@@ -2,7 +2,7 @@
 title: Animator Key Hashing
 difficulty: 1 #1-3
 code: 1
-art: 0
+art: 1
 engine: 0
 ---
 <!--instead-of-->

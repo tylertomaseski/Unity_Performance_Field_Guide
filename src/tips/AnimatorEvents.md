@@ -2,7 +2,7 @@
 title: Animator events & animator state behaviours
 difficulty: 3 #1-3
 code: 1
-art: 0
+art: 1
 engine: 0
 animation: 1
 ---
