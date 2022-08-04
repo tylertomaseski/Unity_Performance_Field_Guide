@@ -1,0 +1,7 @@
+Animator Key Hashing
+<!--instead-of-->
+<p>Setting and getting values from animators with strings.</p>
+<!--try-->
+<p>Generating string hashes once and then using generated ints.</p>
+<!--because-->
+<p>Every time you pass a string to an animator, it will &quot;hash&quot; the string. Which is slow. You can instead do this once on your end, and reuse the generated integer id.</p>

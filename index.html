@@ -35,7 +35,7 @@
 <p><strong>What’s the best way to optimize your game?</strong> <em><strong>It’s to write it performant in the first place!</strong></em> Performance is all about good habits, so you can write performant code without slowing down production. Part of why doing that is so hard, is that sometimes you don’t know the best way or the pitfalls of the engine until it’s too late. This field-guide is an attempt to articulate a series of from-the-trenches tips and tricks.</p>
 <p>The Unity Performance Field Guide is put together as an effort to concentrate knowledge shared in <a href="https://societyofplay.net/">Society of Play</a> community discussions into a single reference point.</p>
 <p><strong>Curator:</strong> Tyler Tomaseski<br />
-<strong>Contributors:</strong> Adam Strick, &amp; Liz Gravis</p>
+<strong>Contributors:</strong> Adam Strick, Scott Robertson, &amp; Liz Gravis</p>
 <p>Unity Performance Field-Guide is an <a href="https://github.com/tylertomaseski/Unity-Performance-Field-Guide">open-source project and can be found here</a>.</p>
 <p><strong>The Unity Field Guide is not officially supported or sponsored by Unity in any way.</strong></p>
 
@@ -63,6 +63,196 @@
 
             <div class="filter-body"><div class="columns filter-item" data-tag="tag-1">
                         <div class="column col-9 col-sm-12">
+                            <h2 class="mb-0">Animator events & animator state behaviours</h2>
+                            <div class="ml-1">
+                                <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
+                        </div>
+
+                        <div class="column col-3 col-sm-12 pt-2 panel">
+                            <h6 class="" style="text-align: center;">Difficulty</h6>
+                            <ul class="step">
+                                <!-- Switch to shortcode for this conditional -->
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Trivial">1</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Worthwhile, but non-trivial">2</a>
+                                </li>
+                                <li class="step-item active">
+                                    <a href="#" class="tooltip" data-tooltip="Difficult, but worthwhile if you have the time">3</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- INSTEAD OF --><div class="column col-12">
+                                <h4>Instead of...</h4>
+                                <p>
+                                    
+Using animator <a href="https://docs.unity3d.com/ScriptReference/StateMachineBehaviour.html">StateMachineBehaviour</a> or <a href ="https://docs.unity3d.com/Manual/script-AnimationWindowEvent.html">Animation Events</a>.
+
+                                </p>
+                            </div><!-- TRY --><div class="column col-4 col-md-12">
+                                <h4>Try instead...</h4>
+                                <p>
+                                    
+Avoid reading from animators at all if possible. If necessary, read animation data explicitly after animations finish for that frame.
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">void LateUpdate() {
+    //...
+    AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+    //...
+}</span></code></pre>
+                            </div><!-- BECAUSE -->
+                        <div class="column col-12">
+                            <h4>Because...</h4>
+                            <p>
+                                
+StateMachineBehaviour callbacks and Animation Events lock animation work to the main thread, severely limiting multithreading and creating a bottleneck.
+<br/><br/>
+This requires a good amount of architecture and tools for authoring animation events & behaviours.
+                            </p>
+
+                            <div class="divider"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                    <!-- End COLUMNS --><div class="columns filter-item" data-tag="tag-1">
+                        <div class="column col-9 col-sm-12">
+                            <h2 class="mb-0">Animator Key Hashing</h2>
+                            <div class="ml-1">
+                                <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
+                        </div>
+
+                        <div class="column col-3 col-sm-12 pt-2 panel">
+                            <h6 class="" style="text-align: center;">Difficulty</h6>
+                            <ul class="step">
+                                <!-- Switch to shortcode for this conditional -->
+                                <li class="step-item active">
+                                    <a href="#" class="tooltip" data-tooltip="Trivial">1</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Worthwhile, but non-trivial">2</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Difficult, but worthwhile if you have the time">3</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- INSTEAD OF --><div class="column col-4 col-md-12">
+                                <h4>Instead of...</h4>
+                                <p>
+                                    
+Setting and getting values from animators with strings.
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">void Update() 
+{
+    Animator.SetFloat("PropertyName", ...)
+}</span></code></pre>
+                            </div><!-- TRY --><div class="column col-4 col-md-12">
+                                <h4>Try instead...</h4>
+                                <p>
+                                    
+Generating string hashes once and then using generated ints.
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">int Key_PropertyName;
+
+void Awake() 
+{
+    Key_PropertyName = Animator.StringToHash("PropertyName");
+}
+
+void Update() 
+{
+    Animator.SetFloat(Key_PropertyName, ...)
+}</span></code></pre>
+                            </div><!-- BECAUSE -->
+                        <div class="column col-12">
+                            <h4>Because...</h4>
+                            <p>
+                                
+Every time you pass a string to an animator, it will "hash" the string. Which is slow. You can instead do this once on your end, and reuse the generated integer id.
+                            </p>
+
+                            <div class="divider"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                    <!-- End COLUMNS --><div class="columns filter-item" data-tag="tag-1">
+                        <div class="column col-9 col-sm-12">
+                            <h2 class="mb-0">Empty Start(), Update(), Etc...</h2>
+                            <div class="ml-1">
+                                <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
+                        </div>
+
+                        <div class="column col-3 col-sm-12 pt-2 panel">
+                            <h6 class="" style="text-align: center;">Difficulty</h6>
+                            <ul class="step">
+                                <!-- Switch to shortcode for this conditional -->
+                                <li class="step-item active">
+                                    <a href="#" class="tooltip" data-tooltip="Trivial">1</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Worthwhile, but non-trivial">2</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Difficult, but worthwhile if you have the time">3</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- INSTEAD OF --><div class="column col-4 col-md-12">
+                                <h4>Instead of...</h4>
+                                <p>
+                                    
+Leaving empty Unity callback methods laying around.
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">void Start() {
+
+}
+
+void Update() {
+    
+}</span></code></pre>
+                            </div><!-- TRY --><div class="column col-4 col-md-12">
+                                <h4>Try instead...</h4>
+                                <p>
+                                    
+Deleting them!
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">//JohnTravoltaMeme.gif</span></code></pre>
+                            </div><!-- BECAUSE -->
+                        <div class="column col-12">
+                            <h4>Because...</h4>
+                            <p>
+                                
+Turns out Unity will not optimize out those functions that they put there for you. Remember that Start function in every MonoBehaviour that you left there? They're slowing you down. Delete 'em!
+                            </p>
+
+                            <div class="divider"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                    <!-- End COLUMNS --><div class="columns filter-item" data-tag="tag-1">
+                        <div class="column col-9 col-sm-12">
                             <h2 class="mb-0">Avoid default C# Data Structures</h2>
                             <div class="ml-1">
                                 <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
@@ -85,20 +275,20 @@
                         </div>
 
                         <!-- INSTEAD OF --><div class="column col-12">
-                            <h4>Instead of...</h4>
-                            <p>
-                                
+                                <h4>Instead of...</h4>
+                                <p>
+                                    
 List, SparseSet, Dictionary, Etc.
 
-                            </p>
-                        </div><!-- TRY --><div class="column col-12">
-                            <h4>Try instead...</h4>
-                            <p>
-                                
+                                </p>
+                            </div><!-- TRY --><div class="column col-12">
+                                <h4>Try instead...</h4>
+                                <p>
+                                    
 GDX, an open-source collection of custom data-types geared towards gamedev and performance.
 
-                            </p>
-                        </div><!-- BECAUSE -->
+                                </p>
+                            </div><!-- BECAUSE -->
                         <div class="column col-12">
                             <h4>Because...</h4>
                             <p>
@@ -144,69 +334,12 @@ Checking a collections length inside the for-loop.
 
                                 </p>
                             </div>
-                        <div class="column col-8 col-md-12">
-                            <pre class="code" data-lang="C#"><code><span class="com">For (... ; i < collection.Count ; …)</span></code></pre>
-                        </div><!-- TRY --><div class="column col-4 col-md-12">
-                                <h4>Try instead...</h4>
-                                <p>
-                                    
-Cache the collections length and use the cached int in the for-loop.
-
-                                </p>
-                            </div>
                             <div class="column col-8 col-md-12">
-                                <pre class="code" data-lang="C#"><code><span class="com">Int count = collection.Count;
-For (… ; i < count ; …)</span></code></pre>
-                            </div><!-- BECAUSE -->
-                        <div class="column col-12">
-                            <h4>Because...</h4>
-                            <p>
-                                
-The compiler doesn't know if you've edited the array, so it politely asks the collection every for-loop what it's length is. This isn't a hurculean task, but it takes a little time. And this adds up across your entire code-base! 
-                            </p>
-
-                            <div class="divider"></div>
-                            <br/>
-                            <br/>
-                        </div>
-                    </div>
-                    <!-- End COLUMNS --><div class="columns filter-item" data-tag="tag-1">
-                        <div class="column col-9 col-sm-12">
-                            <h2 class="mb-0">Check array length once in a for-loop</h2>
-                            <div class="ml-1">
-                                <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
-                        </div>
-
-                        <div class="column col-3 col-sm-12 pt-2 panel">
-                            <h6 class="" style="text-align: center;">Difficulty</h6>
-                            <ul class="step">
-                                <!-- Switch to shortcode for this conditional -->
-                                <li class="step-item active">
-                                    <a href="#" class="tooltip" data-tooltip="Trivial">1</a>
-                                </li>
-                                <li class="step-item">
-                                    <a href="#" class="tooltip" data-tooltip="Worthwhile, but non-trivial">2</a>
-                                </li>
-                                <li class="step-item">
-                                    <a href="#" class="tooltip" data-tooltip="Difficult, but worthwhile if you have the time">3</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!-- INSTEAD OF --><div class="column col-4 col-md-12">
-                                <h4>Instead of...</h4>
-                                <p>
-                                    
-Checking a collections length inside the for-loop.
-
-                                </p>
-                            </div>
-                        <div class="column col-8 col-md-12">
-                            <pre class="code" data-lang="C#"><code><span class="com">for (... ; i < collection.Count ; …)
+                                <pre class="code" data-lang="C#"><code><span class="com">for (... ; i < collection.Count ; …)
 {
     …
 }</span></code></pre>
-                        </div><!-- TRY --><div class="column col-4 col-md-12">
+                            </div><!-- TRY --><div class="column col-4 col-md-12">
                                 <h4>Try instead...</h4>
                                 <p>
                                     
@@ -215,7 +348,7 @@ Cache the collections length and use the cached int in the for-loop.
                                 </p>
                             </div>
                             <div class="column col-8 col-md-12">
-                                <pre class="code" data-lang="C#"><code><span class="com">Int count = collection.Count;
+                                <pre class="code" data-lang="C#"><code><span class="com">int count = collection.Count;
 for (… ; i < count ; …)
 {
     …

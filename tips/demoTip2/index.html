@@ -1,7 +1,0 @@
-Check array length once in a for-loop
-<!--instead-of-->
-<p>Checking a collections length inside the for-loop.</p>
-<!--try-->
-<p>Cache the collections length and use the cached int in the for-loop.</p>
-<!--because-->
-<p>The compiler doesn't know if you've edited the array, so it politely asks the collection every for-loop what it's length is. This isn't a hurculean task, but it takes a little time. And this adds up across your entire code-base!</p>
