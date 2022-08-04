@@ -1,6 +1,6 @@
 ---
 title: Deep transform hierarchies
-difficulty: 2 #1-3
+difficulty: 1 #1-3
 code: 1
 art: 0
 engine: 0

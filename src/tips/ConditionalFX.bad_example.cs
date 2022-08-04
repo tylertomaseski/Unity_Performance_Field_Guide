@@ -1,0 +1,3 @@
+void SpawnFX() {
+    GameObject.Instantiate(/*...*/);
+}
