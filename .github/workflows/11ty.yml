@@ -23,7 +23,7 @@ jobs:
     # - name: Build
     #   run: dotnet build ./Unity-Performance-Field-Guide.csproj --configuration Release --no-restore
     - name: Run
-      run: npx @11ty/eleventy --formats=html,gif,liquid,md,css,toml --input=src --output=_site
+      run: npx @11ty/eleventy --formats=html,gif,png,jpeg,liquid,md,css,toml --input=src --output=_site
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4
