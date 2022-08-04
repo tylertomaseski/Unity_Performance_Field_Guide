@@ -1,5 +1,8 @@
+//
+// EXAMPLE 1
 //an optimized string-key dictionary from GDX
-static StringKeyDictionary<object> lookupDictionary = ...;
+
+static StringKeyDictionary$lt:object$gt: lookupDictionary = ...;
 
 public string ID;
 
@@ -15,7 +18,10 @@ static void SomeFunc(string ID) {
     ...   
 }
 
-//alternate and even better, sparse-set from  GDX
+//
+// EXAMPLE 2
+// alternate and even better, sparse-set from  GDX
+
 static SparseSet sparseSet = ...;
 static object[] instances = ..;
 
@@ -23,7 +29,7 @@ private int sparseIndex;
 private int denseIndex;
 
 void Awake() {
-    sparseSet.AddWithExpandCheck<object>(this, ref instances, out sparseIndex, out denseIndex);
+    sparseSet.AddWithExpandCheck$lt:object$gt:(this, ref instances, out sparseIndex, out denseIndex);
 }
 
 ...
