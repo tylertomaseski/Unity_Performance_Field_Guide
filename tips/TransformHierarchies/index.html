@@ -1,0 +1,8 @@
+Deep transform hierarchies
+<!--instead-of-->
+<p>Maintaining large Transform hierarchies (for UI or temporary shared motion or scene organization)</p>
+<!--try-->
+<p>Keep Transform hierarchies as flat as possible</p>
+<!--because-->
+<p>They make internal per-frame Transform operations slower. Transform hierarchies reduce the multithreading ability of the animation system and IJobParallelForTransform jobs. They make most UI operations slower.</p>
+<p>If you NEED to maintain deep transform parenting, consider unparenting objects at runtime.</p>

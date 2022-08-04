@@ -1,0 +1,7 @@
+Time.deltaTime and other static accessors
+<!--instead-of-->
+<p>Accessing static variables like Time.deltaTime whenever you need them</p>
+<!--try-->
+<p>Cache them once per frame in your own static variables before any logic runs for the frame.</p>
+<!--because-->
+<p>Many static accessors go through the same managed/native interop as Transform does. Many that don’t still involve expensive interactions with the operating system. Many do both.</p>

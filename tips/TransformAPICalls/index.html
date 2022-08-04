@@ -1,0 +1,7 @@
+Transform.position and other extern APIs
+<!--instead-of-->
+<p>Using Transform.position, Transform.rotation, etc. multiple times per-frame</p>
+<!--try-->
+<p>Access any Transform data you need twice per simulation step in an IJobParallelForTransform job: once for reading from Transforms, once for writing to them.</p>
+<!--because-->
+<p>Transform access is slow. It involves expensive managed/native interop and struct copying.</p>

@@ -63,12 +63,12 @@
 
             <div class="filter-body"><div class="columns filter-item" data-tag="tag-1">
                         <div class="column col-9 col-sm-12">
-                            <h2 class="mb-0">Animator events & animator state behaviours</h2>
+                            <h2 class="mb-0 label label-primary">Animator events & animator state behaviours</h2>
                             <div class="ml-1">
                                 <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
                         </div>
 
-                        <div class="column col-3 col-sm-12 pt-2 panel">
+                        <div class="column col-3 col-sm-12 pt-2 panel label label-secondary">
                             <h6 class="" style="text-align: center;">Difficulty</h6>
                             <ul class="step">
                                 <!-- Switch to shortcode for this conditional -->
@@ -84,15 +84,15 @@
                             </ul>
                         </div>
 
-                        <!-- INSTEAD OF --><div class="column col-12">
-                                <h4>Instead of...</h4>
+                        <!-- INSTEAD OF --><div class="column col-12 mt-2">
+                                <h4 class="label label-error">Instead of...</h4>
                                 <p>
                                     
 Using animator <a href="https://docs.unity3d.com/ScriptReference/StateMachineBehaviour.html">StateMachineBehaviour</a> or <a href ="https://docs.unity3d.com/Manual/script-AnimationWindowEvent.html">Animation Events</a>.
 
                                 </p>
-                            </div><!-- TRY --><div class="column col-4 col-md-12">
-                                <h4>Try instead...</h4>
+                            </div><!-- TRY --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-success">Try instead...</h4>
                                 <p>
                                     
 Avoid reading from animators at all if possible. If necessary, read animation data explicitly after animations finish for that frame.
@@ -122,12 +122,12 @@ This requires a good amount of architecture and tools for authoring animation ev
                     </div>
                     <!-- End COLUMNS --><div class="columns filter-item" data-tag="tag-1">
                         <div class="column col-9 col-sm-12">
-                            <h2 class="mb-0">Animator Key Hashing</h2>
+                            <h2 class="mb-0 label label-primary">Animator Key Hashing</h2>
                             <div class="ml-1">
                                 <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
                         </div>
 
-                        <div class="column col-3 col-sm-12 pt-2 panel">
+                        <div class="column col-3 col-sm-12 pt-2 panel label label-secondary">
                             <h6 class="" style="text-align: center;">Difficulty</h6>
                             <ul class="step">
                                 <!-- Switch to shortcode for this conditional -->
@@ -143,8 +143,8 @@ This requires a good amount of architecture and tools for authoring animation ev
                             </ul>
                         </div>
 
-                        <!-- INSTEAD OF --><div class="column col-4 col-md-12">
-                                <h4>Instead of...</h4>
+                        <!-- INSTEAD OF --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-error">Instead of...</h4>
                                 <p>
                                     
 Setting and getting values from animators with strings.
@@ -156,8 +156,8 @@ Setting and getting values from animators with strings.
 {
     Animator.SetFloat("PropertyName", ...)
 }</span></code></pre>
-                            </div><!-- TRY --><div class="column col-4 col-md-12">
-                                <h4>Try instead...</h4>
+                            </div><!-- TRY --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-success">Try instead...</h4>
                                 <p>
                                     
 Generating string hashes once and then using generated ints.
@@ -191,12 +191,12 @@ Every time you pass a string to an animator, it will "hash" the string. Which is
                     </div>
                     <!-- End COLUMNS --><div class="columns filter-item" data-tag="tag-1">
                         <div class="column col-9 col-sm-12">
-                            <h2 class="mb-0">Empty Start(), Update(), Etc...</h2>
+                            <h2 class="mb-0 label label-primary">Empty Start(), Update(), Etc...</h2>
                             <div class="ml-1">
                                 <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
                         </div>
 
-                        <div class="column col-3 col-sm-12 pt-2 panel">
+                        <div class="column col-3 col-sm-12 pt-2 panel label label-secondary">
                             <h6 class="" style="text-align: center;">Difficulty</h6>
                             <ul class="step">
                                 <!-- Switch to shortcode for this conditional -->
@@ -212,8 +212,8 @@ Every time you pass a string to an animator, it will "hash" the string. Which is
                             </ul>
                         </div>
 
-                        <!-- INSTEAD OF --><div class="column col-4 col-md-12">
-                                <h4>Instead of...</h4>
+                        <!-- INSTEAD OF --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-error">Instead of...</h4>
                                 <p>
                                     
 Leaving empty Unity callback methods laying around.
@@ -228,8 +228,8 @@ Leaving empty Unity callback methods laying around.
 void Update() {
     
 }</span></code></pre>
-                            </div><!-- TRY --><div class="column col-4 col-md-12">
-                                <h4>Try instead...</h4>
+                            </div><!-- TRY --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-success">Try instead...</h4>
                                 <p>
                                     
 Deleting them!
@@ -253,12 +253,165 @@ Turns out Unity will not optimize out those functions that they put there for yo
                     </div>
                     <!-- End COLUMNS --><div class="columns filter-item" data-tag="tag-1">
                         <div class="column col-9 col-sm-12">
-                            <h2 class="mb-0">Avoid default C# Data Structures</h2>
+                            <h2 class="mb-0 label label-primary">Transform.position and other extern APIs</h2>
                             <div class="ml-1">
                                 <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
                         </div>
 
-                        <div class="column col-3 col-sm-12 pt-2 panel">
+                        <div class="column col-3 col-sm-12 pt-2 panel label label-secondary">
+                            <h6 class="" style="text-align: center;">Difficulty</h6>
+                            <ul class="step">
+                                <!-- Switch to shortcode for this conditional -->
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Trivial">1</a>
+                                </li>
+                                <li class="step-item active">
+                                    <a href="#" class="tooltip" data-tooltip="Worthwhile, but non-trivial">2</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Difficult, but worthwhile if you have the time">3</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- INSTEAD OF --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-error">Instead of...</h4>
+                                <p>
+                                    
+Using Transform.position, Transform.rotation, etc. multiple times per-frame
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">void Update() 
+{
+    this.transform.position += Vector3.left * (Input.GetKeyDown(KeyCode.A) ? 1f : 0f);
+    this.transform.position += Vector3.right * (Input.GetKeyDown(KeyCode.D) ? 1f : 0f);
+
+    //...
+    
+    this.transform.rotation = Quaternion.LookDirection(...);
+    this.transform.rotation = this.transform.rotation * tiltRotation;
+
+    //...
+}</span></code></pre>
+                            </div><!-- TRY --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-success">Try instead...</h4>
+                                <p>
+                                    
+Access any Transform data you need twice per simulation step in an IJobParallelForTransform job: once for reading from Transforms, once for writing to them.
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">[BurstCompile]
+public struct TransformJob : IJobParallelForTransform
+{      
+    public void Execute(int index, TransformAccess transform)
+    {
+        Vector3 position = transform.position;
+        Quaternion rotation = transform.rotation;
+
+        //
+        // Your logic
+        //
+
+        transform.position = position;
+        transform.rotation = rotation;
+    }
+}
+</span></code></pre>
+                            </div><!-- BECAUSE -->
+                        <div class="column col-12">
+                            <h4>Because...</h4>
+                            <p>
+                                
+Transform access is slow. It involves expensive managed/native interop and struct copying.
+                            </p>
+
+                            <div class="divider"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                    <!-- End COLUMNS --><div class="columns filter-item" data-tag="tag-1">
+                        <div class="column col-9 col-sm-12">
+                            <h2 class="mb-0 label label-primary">Deep transform hierarchies</h2>
+                            <div class="ml-1">
+                                <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
+                        </div>
+
+                        <div class="column col-3 col-sm-12 pt-2 panel label label-secondary">
+                            <h6 class="" style="text-align: center;">Difficulty</h6>
+                            <ul class="step">
+                                <!-- Switch to shortcode for this conditional -->
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Trivial">1</a>
+                                </li>
+                                <li class="step-item active">
+                                    <a href="#" class="tooltip" data-tooltip="Worthwhile, but non-trivial">2</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Difficult, but worthwhile if you have the time">3</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- INSTEAD OF --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-error">Instead of...</h4>
+                                <p>
+                                    
+Maintaining large Transform hierarchies (for UI or temporary shared motion or scene organization)
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">//Unity transform hierarchy
+
+> Gameobject Category Container
+    > My GO Container
+        > Sub Container
+            > Regional Offset
+                > Extra transform in prefab
+                    > Crates Container
+                        > Crate group Offset
+                            > Crate</span></code></pre>
+                            </div><!-- TRY --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-success">Try instead...</h4>
+                                <p>
+                                    
+Keep Transform hierarchies as flat as possible
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">//Unity Transform Hierarcy
+> Gameobject Category Container //just sits above relevant hierarchies
+> Regional Offset
+    > Crate</span></code></pre>
+                            </div><!-- BECAUSE -->
+                        <div class="column col-12">
+                            <h4>Because...</h4>
+                            <p>
+                                
+They make internal per-frame Transform operations slower. Transform hierarchies reduce the multithreading ability of the animation system and IJobParallelForTransform jobs. They make most UI operations slower.
+
+If you NEED to maintain deep transform parenting, consider unparenting objects at runtime.
+                            </p>
+
+                            <div class="divider"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                    <!-- End COLUMNS --><div class="columns filter-item" data-tag="tag-1">
+                        <div class="column col-9 col-sm-12">
+                            <h2 class="mb-0 label label-primary">Avoid default C# Data Structures</h2>
+                            <div class="ml-1">
+                                <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
+                        </div>
+
+                        <div class="column col-3 col-sm-12 pt-2 panel label label-secondary">
                             <h6 class="" style="text-align: center;">Difficulty</h6>
                             <ul class="step">
                                 <!-- Switch to shortcode for this conditional -->
@@ -274,15 +427,15 @@ Turns out Unity will not optimize out those functions that they put there for yo
                             </ul>
                         </div>
 
-                        <!-- INSTEAD OF --><div class="column col-12">
-                                <h4>Instead of...</h4>
+                        <!-- INSTEAD OF --><div class="column col-12 mt-2">
+                                <h4 class="label label-error">Instead of...</h4>
                                 <p>
                                     
 List, SparseSet, Dictionary, Etc.
 
                                 </p>
-                            </div><!-- TRY --><div class="column col-12">
-                                <h4>Try instead...</h4>
+                            </div><!-- TRY --><div class="column col-12 mt-2">
+                                <h4 class="label label-success">Try instead...</h4>
                                 <p>
                                     
 GDX, an open-source collection of custom data-types geared towards gamedev and performance.
@@ -305,12 +458,12 @@ Getting the right data-type will not only be faster, but give you catered archit
                     </div>
                     <!-- End COLUMNS --><div class="columns filter-item" data-tag="tag-1">
                         <div class="column col-9 col-sm-12">
-                            <h2 class="mb-0">Check array length once in a for-loop</h2>
+                            <h2 class="mb-0 label label-primary">Time.deltaTime and other static accessors</h2>
                             <div class="ml-1">
                                 <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
                         </div>
 
-                        <div class="column col-3 col-sm-12 pt-2 panel">
+                        <div class="column col-3 col-sm-12 pt-2 panel label label-secondary">
                             <h6 class="" style="text-align: center;">Difficulty</h6>
                             <ul class="step">
                                 <!-- Switch to shortcode for this conditional -->
@@ -326,8 +479,96 @@ Getting the right data-type will not only be faster, but give you catered archit
                             </ul>
                         </div>
 
-                        <!-- INSTEAD OF --><div class="column col-4 col-md-12">
-                                <h4>Instead of...</h4>
+                        <!-- INSTEAD OF --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-error">Instead of...</h4>
+                                <p>
+                                    
+Accessing static variables like Time.deltaTime whenever you need them
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">public class SomeGameplayClass : MonoBehaviour 
+{
+    void Update() {
+        //..
+        timer += Time.deltaTime;
+        //...
+        transform.Rotate(0, 0, degreesPerSecond * Time.deltaTime);
+        ///
+    }
+}</span></code></pre>
+                            </div><!-- TRY --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-success">Try instead...</h4>
+                                <p>
+                                    
+Cache them once per frame in your own static variables before any logic runs for the frame.
+
+                                </p>
+                            </div>
+                            <div class="column col-8 col-md-12">
+                                <pre class="code" data-lang="C#"><code><span class="com">[DefaultExecutionOrder(-1000)]
+public class MyTime : MonoBehaviour
+{
+    public static float deltaTime;
+
+    void Update() 
+    {
+        deltaTime = Time.deltaTime;
+    }
+
+    void FixedUpdate() 
+    {
+        deltaTime = Time.deltaTime;
+    }
+}
+
+public class SomeGameplayClass : MonoBehaviour 
+{
+    void Update() {
+        //..
+        this.timer += MyTime.deltaTime;
+        //...
+    }
+}</span></code></pre>
+                            </div><!-- BECAUSE -->
+                        <div class="column col-12">
+                            <h4>Because...</h4>
+                            <p>
+                                
+Many static accessors go through the same managed/native interop as Transform does. Many that don’t still involve expensive interactions with the operating system. Many do both.
+                            </p>
+
+                            <div class="divider"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                    <!-- End COLUMNS --><div class="columns filter-item" data-tag="tag-1">
+                        <div class="column col-9 col-sm-12">
+                            <h2 class="mb-0 label label-primary">Check array length once in a for-loop</h2>
+                            <div class="ml-1">
+                                <i class="ml-1">Tags: </i><span class="chip">Code</span></div>
+                        </div>
+
+                        <div class="column col-3 col-sm-12 pt-2 panel label label-secondary">
+                            <h6 class="" style="text-align: center;">Difficulty</h6>
+                            <ul class="step">
+                                <!-- Switch to shortcode for this conditional -->
+                                <li class="step-item active">
+                                    <a href="#" class="tooltip" data-tooltip="Trivial">1</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Worthwhile, but non-trivial">2</a>
+                                </li>
+                                <li class="step-item">
+                                    <a href="#" class="tooltip" data-tooltip="Difficult, but worthwhile if you have the time">3</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- INSTEAD OF --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-error">Instead of...</h4>
                                 <p>
                                     
 Checking a collections length inside the for-loop.
@@ -339,8 +580,8 @@ Checking a collections length inside the for-loop.
 {
     …
 }</span></code></pre>
-                            </div><!-- TRY --><div class="column col-4 col-md-12">
-                                <h4>Try instead...</h4>
+                            </div><!-- TRY --><div class="column col-4 col-md-12 mt-2">
+                                <h4 class="label label-success">Try instead...</h4>
                                 <p>
                                     
 Cache the collections length and use the cached int in the for-loop.
